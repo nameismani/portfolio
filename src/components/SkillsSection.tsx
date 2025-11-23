@@ -1,6 +1,9 @@
-"use client"
+"use client";
 import clsx from "clsx";
 import React, { useState } from "react";
+import { MotionDiv } from "@/motion/framer_motion";
+import { Divide } from "lucide-react";
+import { Section } from "./common";
 
 type SkillCategory = "frontend" | "backend" | "tools" | "all";
 
@@ -12,30 +15,53 @@ type Skill = {
 
 const skills: Skill[] = [
   // Frontend
-  { name: "HTML/CSS", level: 95, category: "frontend" },
-  { name: "JavaScript", level: 90, category: "frontend" },
-  { name: "React", level: 90, category: "frontend" },
-  { name: "TypeScript", level: 85, category: "frontend" },
+  { name: "HTML5/CSS3", level: 90, category: "frontend" },
+  { name: "JavaScript DOM", level: 90, category: "frontend" },
+  { name: "Bootstrap", level: 80, category: "frontend" },
   { name: "Tailwind CSS", level: 90, category: "frontend" },
-  { name: "Next.js", level: 80, category: "frontend" },
+  { name: "React.js", level: 90, category: "frontend" },
+  { name: "Next.js", level: 90, category: "frontend" },
+  { name: "JQuery", level: 80, category: "frontend" },
+  { name: "React Native", level: 60, category: "frontend" },
 
   // Backend
-  { name: "Node.js", level: 80, category: "backend" },
-  { name: "Express", level: 75, category: "backend" },
-  { name: "MongoDB", level: 70, category: "backend" },
-  { name: "PostgreSQL", level: 65, category: "backend" },
-  { name: "GraphQL", level: 60, category: "backend" },
+  { name: "Node.js", level: 90, category: "backend" },
+  { name: "Express", level: 90, category: "backend" },
+  { name: "MongoDB", level: 90, category: "backend" },
+  { name: "MySQL", level: 85, category: "backend" },
+  { name: "TypeORM", level: 90, category: "backend" },
+  { name: "Python", level: 80, category: "backend" },
+  { name: "Flask", level: 60, category: "backend" },
+  { name: "FastAPI", level: 85, category: "backend" },
+  { name: "Razorpay", level: 60, category: "backend" },
 
   // Tools
   { name: "Git/GitHub", level: 90, category: "tools" },
-  { name: "Docker", level: 70, category: "tools" },
-  { name: "Figma", level: 85, category: "tools" },
-  { name: "VS Code", level: 95, category: "tools" },
+  { name: "AWS", level: 65, category: "tools" },
+  { name: "Linux", level: 65, category: "tools" },
+  { name: "TanStack Query", level: 85, category: "tools" },
+  { name: "React Hook Form", level: 75, category: "tools" },
+  { name: "Framer Motion", level: 80, category: "tools" },
+  { name: "AI/ML", level: 50, category: "tools" },
 ];
 
 const categories: SkillCategory[] = ["all", "frontend", "backend", "tools"];
 
- const SkillsSection = () => {
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const SkillsSection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<SkillCategory>("all");
 
   const filteredSkills = skills.filter(
@@ -43,54 +69,67 @@ const categories: SkillCategory[] = ["all", "frontend", "backend", "tools"];
   );
 
   return (
-    <section id="skills" className="py-24 px-4 relative bg-secondary/30">
-      <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          My <span className="text-primary"> Skills</span>
-        </h2>
+    <Section id="skills" className="bg-secondary/30">
+      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+        My <span className="text-primary"> Skills</span>
+      </h2>
 
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={clsx(
-                "px-5 py-2 rounded-full transition-colors duration-300 capitalize",
-                activeCategory === category
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary/70 text-foreground hover:bg-secondary"
-              )}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredSkills.map((skill) => (
-            <div
-              key={skill.name}
-              className="bg-card p-6 rounded-lg shadow-xs card-hover"
-            >
-              <div className="text-left mb-4">
-                <h3 className="font-semibold text-lg">{skill.name}</h3>
-              </div>
-              <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
-                <div
-                  className="bg-primary h-2 rounded-full origin-left animate-[grow_1.5s_ease-out]"
-                  style={{ width: `${skill.level}%` }}
-                />
-              </div>
-              <div className="text-right mt-1">
-                <span className="text-sm text-muted-foreground">
-                  {skill.level}%
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
+      {/* Category Buttons without animation */}
+      <div className="flex flex-wrap justify-center gap-4 mb-12">
+        {categories.map((category) => (
+          <button
+            key={category}
+            onClick={() => setActiveCategory(category)}
+            className={clsx(
+              "px-5 py-2 rounded-full transition-all duration-200 capitalize cursor-pointer active:scale-[0.98]",
+              activeCategory === category
+                ? "bg-primary text-primary-foreground"
+                : "bg-secondary/70 text-foreground hover:bg-secondary"
+            )}
+          >
+            {category}
+          </button>
+        ))}
       </div>
-    </section>
+
+      {/* Animated skill cards */}
+      <MotionDiv
+        key={activeCategory + "-skills"}
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        variants={staggerContainer}
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+      >
+        {filteredSkills.map((skill) => (
+          <MotionDiv
+            key={skill.name}
+            className="bg-card p-6 rounded-lg shadow-xs card-hover"
+            variants={fadeUp}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            layout
+          >
+            <div className="text-left mb-4">
+              <h3 className="font-semibold text-lg">{skill.name}</h3>
+            </div>
+            <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
+              <MotionDiv
+                className="bg-primary h-2 rounded-full origin-left"
+                initial={{ width: 0 }}
+                animate={{ width: `${skill.level}%` }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+              />
+            </div>
+            <div className="text-right mt-1">
+              <span className="text-sm text-muted-foreground">
+                {skill.level}%
+              </span>
+            </div>
+          </MotionDiv>
+        ))}
+      </MotionDiv>
+    </Section>
   );
 };
 
