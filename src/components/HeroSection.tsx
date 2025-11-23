@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
 import { ArrowDown } from "lucide-react";
+import { Link as ScrollLink } from "react-scroll";
 
- const HeroSection= () => {
+const HeroSection = () => {
   return (
     <section
       id="hero"
@@ -28,9 +30,15 @@ import { ArrowDown } from "lucide-react";
           </p>
 
           <div className="pt-4 opacity-0 animate-fade-in-delay-4 active:scale-[0.98] transition-all duration-200 cursor-pointer">
-            <a href="#projects" className="cosmic-button">
+            <ScrollLink
+              to="projects"
+              smooth={true}
+              duration={500}
+              offset={0}
+              className="cosmic-button cursor-pointer"
+            >
               View My Work
-            </a>
+            </ScrollLink>
           </div>
         </div>
       </div>

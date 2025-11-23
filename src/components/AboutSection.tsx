@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
 import { Briefcase, Code, User } from "lucide-react";
+import { Link as ScrollLink } from "react-scroll";
 
- const AboutSection= () => {
+const AboutSection = () => {
   return (
     <section id="about" className="py-24 px-4 relative">
       <div className="container mx-auto max-w-5xl">
@@ -29,9 +31,15 @@ import { Briefcase, Code, User } from "lucide-react";
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
-              <a href="#contact" className="cosmic-button">
+              <ScrollLink
+                to="contact"
+                smooth={true}
+                duration={500}
+                offset={0}
+                className="cosmic-button cursor-pointer"
+              >
                 Get In Touch
-              </a>
+              </ScrollLink>
 
               <a
                 href=""

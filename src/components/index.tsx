@@ -4,5 +4,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import AboutSection from "@/components/AboutSection";
 import SkillsSection from "@/components/SkillsSection";
 import ProjectsSection from "@/components/ProjectsSection";
+import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
 
-export { HeroSection, StarBackground,ThemeToggle,AboutSection ,SkillsSection,ProjectsSection};
+export { HeroSection, StarBackground,ThemeToggle,AboutSection ,SkillsSection,ProjectsSection,ContactSection,Footer};
