@@ -8,7 +8,7 @@ const Footer = () => {
       {" "}
       <p className="text-sm text-muted-foreground">
         {" "}
-        &copy; {new Date().getFullYear()} Pedrotech.co. All rights reserved.
+        &copy; {new Date().getFullYear()} nameismani.com. All rights reserved.
       </p>
       <ScrollLink
         to="hero"

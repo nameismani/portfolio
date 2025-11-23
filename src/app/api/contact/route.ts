@@ -28,6 +28,20 @@ export async function POST(request: NextRequest) {
       </ul>
     `;
 
+    // Email to yourself (in HTML)
+    await transporter.sendMail({
+      from: `"Website Contact" <${process.env.EMAIL_USER}>`,
+      to: process.env.EMAIL_USER,
+      subject: `New contact form from ${name}`,
+      html: `
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message}</p>
+      `,
+    });
+
+    // Confirmation email to user (in HTML)
     await transporter.sendMail({
       from: `"Website Team" <${process.env.EMAIL_USER}>`,
       to: email,
