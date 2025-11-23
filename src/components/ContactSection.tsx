@@ -1,19 +1,11 @@
 "use client";
 import clsx from "clsx";
-import {
-  Instagram,
-  Linkedin,
-  Mail,
-  MapPin,
-  Phone,
-  Send,
-  Twitch,
-  Twitter,
-} from "lucide-react";
-import React from "react";
+import { Send } from "lucide-react";
+import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Section } from "@/components/common";
+import { useState } from "react";
 
 type ContactFormInputs = {
   name: string;
@@ -26,15 +18,41 @@ const ContactSection = () => {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors, isSubmitting },
-  } = useForm<ContactFormInputs>();
+  } = useForm<ContactFormInputs>({
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+  });
+
+  const eamil = watch("email");
 
   const onSubmit: SubmitHandler<ContactFormInputs> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    toast.success(
-      "Message sent! Thank you for your message. I'll get back to you soon."
-    );
-    reset();
+    try {
+      console.log("Submitting data:", data);
+
+      const response = await axios.post("/api/contact", data);
+
+      if (response.status === 200) {
+        toast.success(
+          "Message sent! Thank you for your message. I'll get back to you soon."
+        );
+
+        reset();
+      } else {
+        toast.error(`Unexpected response: ${response.statusText}`);
+      }
+    } catch (error) {
+      console.log("Error:", error);
+      toast.error(
+        `Error sending message: ${
+          (error as any)?.response?.data?.error || "Please try again later."
+        }`
+      );
+    }
   };
 
   return (
@@ -44,8 +62,9 @@ const ContactSection = () => {
       </h2>
 
       <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-        Have a project in mind or want to collaborate? Feel free to reach out.
-        I'm always open to discussing new opportunities.
+        Whether you're a company interested in hiring me or someone needing a
+        talented freelancer to build your website, you're in the right place.
+        Fill out the form to connect and discuss how we can work together.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -105,6 +124,7 @@ const ContactSection = () => {
               </label>
               <textarea
                 id="message"
+                rows={5}
                 {...register("message", {
                   required: "Message is required",
                 })}
@@ -122,7 +142,8 @@ const ContactSection = () => {
               type="submit"
               disabled={isSubmitting}
               className={clsx(
-                "cosmic-button w-full flex items-center justify-center gap-2"
+                "cosmic-button w-full flex items-center justify-center gap-2",
+                isSubmitting && "opacity-50 cursor-not-allowed"
               )}
             >
               {isSubmitting ? "Sending..." : "Send Message"}

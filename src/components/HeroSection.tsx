@@ -51,6 +51,15 @@ const HeroSection: React.FC = () => {
             my skills to make best out of it
           </MotionParagraph>
 
+          <MotionParagraph
+            variants={fadeUp}
+            className="text-base md:text-lg text-primary font-semibold max-w-2xl mx-auto"
+          >
+            You’re in the right place—whether you need a dedicated teammate or a
+            sharp freelancer for your website. Fast, dependable, and focused on
+            results.
+          </MotionParagraph>
+
           <MotionDiv
             variants={fadeUp}
             className="pt-4 active:scale-[0.98] transition-all duration-200 cursor-pointer"
