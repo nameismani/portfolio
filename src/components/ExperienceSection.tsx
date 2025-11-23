@@ -1,44 +1,10 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import clsx from "clsx";
 import { Section } from "./common";
 import { HiOutlineBriefcase } from "react-icons/hi";
-
-const experiences = [
-  {
-    title: "Full Stack Developer",
-    company: "i2Global",
-    period: "Apr 2025 - Nov 2025",
-    description:
-      "React Hook Form, TanStack Query, Framer Motion, Razorpay, FastAPI. Built TestPrep education platform (live classes, chat/forum, coupons, student management) and Transport App for school management.",
-    skills: ["Nextjs", "FastAPI", "Google Maps", "MongoDB"],
-  },
-  {
-    title: "Product Engineer",
-    company: "Siara Tech Solutions (IntoAEC)",
-    period: "Apr 2024 - Mar 2025",
-    description:
-      "Developed AEC SaaS modules (CRM, Procurement, Asset, Invoice) for architects & engineers. Built Chrome extension for product clipping, notifications, workflow tools.",
-    skills: ["Nextjs", "TypeScript", "TypeORM", "AWS", "Chrome Extension"],
-  },
-  {
-    title: "Web App Dev Trainee",
-    company: "Novalnet e-Solutions",
-    period: "Aug 2023 - Jan 2024",
-    description:
-      "Frontend & backend training. Built user feedback, session lockout, real-time notification/admin tools.",
-    skills: ["Node.js", "Express", "Ejs", "Maria DB"],
-  },
-  {
-    title: "Graduate Engineer Trainee",
-    company: "HCL Tech",
-    period: "Jul 2022 - Jul 2023",
-    description:
-      "HTML, CSS, JS DOM, React JS, gained hands-on IT and web dev experience.",
-    skills: ["HTML", "CSS", "JavaScript", "React"],
-  },
-];
+import { experiences } from "@/constants/experience.contsatns";
+import { MotionDiv, MotionSpan } from "@/motion/framer_motion";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -81,14 +47,14 @@ const ExperienceCard = ({
   const x = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [50, 0, 0, -20]);
 
   return (
-    <motion.div
+    <MotionDiv
       ref={ref}
       style={{ opacity, scale, x }}
       className="relative flex gap-8 mb-12 last:mb-0"
     >
       {/* Step circle with icon */}
       <div className="relative flex-shrink-0">
-        <motion.div
+        <MotionDiv
           initial={{ scale: 0 }}
           whileInView={{ scale: 1 }}
           viewport={{ once: true }}
@@ -96,11 +62,11 @@ const ExperienceCard = ({
           className="w-10 h-10 rounded-full bg-primary flex items-center justify-center z-10 relative"
         >
           <HiOutlineBriefcase className="w-5 h-5 text-primary-foreground" />
-        </motion.div>
+        </MotionDiv>
       </div>
 
       {/* Content card */}
-      <motion.div
+      <MotionDiv
         initial={{ opacity: 0, x: 50 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, amount: 0.3 }}
@@ -124,7 +90,7 @@ const ExperienceCard = ({
 
         <div className="flex flex-wrap gap-2">
           {exp.skills.map((skill, idx) => (
-            <motion.span
+            <MotionSpan
               key={skill}
               initial={{ opacity: 0, scale: 0 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -133,11 +99,11 @@ const ExperienceCard = ({
               className="px-3 py-1 text-xs font-medium rounded-full border bg-secondary text-secondary-foreground"
             >
               {skill}
-            </motion.span>
+            </MotionSpan>
           ))}
         </div>
-      </motion.div>
-    </motion.div>
+      </MotionDiv>
+    </MotionDiv>
   );
 };
 
@@ -171,7 +137,7 @@ const ExperienceSection = () => {
         <div className="absolute left-[19px] top-0 bottom-0 w-0.5 bg-border" />
 
         {/* Animated progress line */}
-        <motion.div
+        <MotionDiv
           style={{ height: lineHeight }}
           className="absolute left-[19px] top-0 w-0.5 bg-primary origin-top"
         />
@@ -183,7 +149,7 @@ const ExperienceSection = () => {
 
       {/* Mobile/Tablet: Horizontal Scroll Stepper */}
       <div className="md:hidden w-full overflow-x-auto scrollbar-hide pb-4">
-        <motion.div
+        <MotionDiv
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
@@ -194,13 +160,13 @@ const ExperienceSection = () => {
           <div className="absolute left-0 right-0 top-[19px] h-0.5 bg-border" />
 
           {experiences.map((exp, idx) => (
-            <motion.div
+            <MotionDiv
               key={exp.company}
               variants={fadeUp}
               className="relative flex flex-col items-center w-[280px] flex-shrink-0"
             >
               {/* Step circle with icon */}
-              <motion.div
+              <MotionDiv
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
@@ -208,10 +174,10 @@ const ExperienceSection = () => {
                 className="size-10 min-w-10 min-h-10 rounded-full bg-primary flex items-center justify-center z-10 mb-4 relative"
               >
                 <HiOutlineBriefcase className="w-5 h-5 text-primary-foreground" />
-              </motion.div>
+              </MotionDiv>
 
               {/* Content card */}
-              <motion.div
+              <MotionDiv
                 whileHover={{ scale: 1.03, y: -5 }}
                 transition={{ duration: 0.3 }}
                 className="bg-card p-5 rounded-lg shadow-xs border border-border w-full h-full flex flex-col"
@@ -232,7 +198,7 @@ const ExperienceSection = () => {
 
                 <div className="flex flex-wrap gap-2 mt-auto">
                   {exp.skills.map((skill, skillIdx) => (
-                    <motion.span
+                    <MotionSpan
                       key={skill}
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
@@ -244,13 +210,13 @@ const ExperienceSection = () => {
                       className="px-2 py-1 text-xs font-medium rounded-full border bg-secondary text-secondary-foreground"
                     >
                       {skill}
-                    </motion.span>
+                    </MotionSpan>
                   ))}
                 </div>
-              </motion.div>
-            </motion.div>
+              </MotionDiv>
+            </MotionDiv>
           ))}
-        </motion.div>
+        </MotionDiv>
       </div>
 
       {/* Mobile scroll hint */}

@@ -1,9 +1,9 @@
-"use client"
-import React, { useEffect, useState } from "react";
+"use client";
+import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
-import clsx from "clsx"; 
+import clsx from "clsx";
 
- const ThemeToggle = () => {
+const ThemeToggle = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ import clsx from "clsx";
       document.documentElement.classList.remove("dark");
     } else {
       localStorage.setItem("theme", "dark");
-       setIsDarkMode(true);
+      setIsDarkMode(true);
       document.documentElement.classList.add("dark");
     }
   }, []);

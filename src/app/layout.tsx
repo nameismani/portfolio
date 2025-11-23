@@ -38,12 +38,12 @@ export const metadata: Metadata = {
     title: "Manikandan — Full Stack Developer, FastAPI & AI Enthusiast",
     description:
       "Experienced full stack developer with expertise in React, Next.js, FastAPI, and AI-powered web applications. Offering freelance services in modern web and AI development.",
-    url: "https://yourwebsite.com",
+    url: "https://portfolio.nameismani.com/",
     siteName: "Manikandan Developer Portfolio",
     locale: "en_US",
     type: "website",
   },
-  metadataBase: new URL("https://yourwebsite.com"),
+  metadataBase: new URL("https://portfolio.nameismani.com/"),
 };
 
 export default function RootLayout({

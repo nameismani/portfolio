@@ -18,7 +18,7 @@ const staggerContainer = {
   },
 };
 
-const HeroSection: React.FC = () => {
+const HeroSection = () => {
   return (
     <section
       id="hero"

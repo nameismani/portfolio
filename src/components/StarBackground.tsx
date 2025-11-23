@@ -1,25 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { Meteor, Star } from "@/types/common.types";
+import { useEffect, useState } from "react";
 
-type Star = {
-  id: number
-  size: number
-  x: number
-  y: number
-  opacity: number
-  animationDuration: number
-}
-
-type Meteor = {
-  id: number
-  size: number
-  x: number
-  y: number
-  delay: number
-  animationDuration: number
-}
-
- const StarBackground = () => {
+const StarBackground = () => {
   const [stars, setStars] = useState<Star[]>([]);
   const [meteors, setMeteors] = useState<Meteor[]>([]);
 
