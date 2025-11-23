@@ -24,7 +24,7 @@ export const projects: Project[] = [
   },
   {
     id: 3,
-    title: "Transport SaaS (i2Global)",
+    title: "Transport (i2Global)",
     description:
       "Student transport booking and management system for i2Global.",
     image: "/projects/Organization_Projects/transport.png",
