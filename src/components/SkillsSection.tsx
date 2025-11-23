@@ -60,7 +60,7 @@ const staggerContainer = {
   },
 };
 
-const SkillsSection: React.FC = () => {
+const SkillsSection = () => {
   const [activeCategory, setActiveCategory] = useState<SkillCategory>("all");
 
   const filteredSkills = skills.filter(

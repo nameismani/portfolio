@@ -1,9 +1,10 @@
 "use client";
-import { Briefcase, Code } from "lucide-react";
+import { Code } from "lucide-react";
 import { Link as ScrollLink } from "react-scroll";
 import { MotionDiv, MotionH3, MotionParagraph } from "@/motion/framer_motion";
 import Link from "next/link";
 import { Section } from "@/components/common";
+import { HiOutlineBriefcase } from "react-icons/hi";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -92,7 +93,7 @@ const AboutSection = () => {
           >
             <div className="flex flex-col lg:flex-row items-center  lg:items-start gap-4">
               <div className="p-3 rounded-full bg-primary/10">
-                <Briefcase className="h-6 w-6 text-primary" />
+                <HiOutlineBriefcase className="h-6 w-6 text-primary" />
               </div>
               <div className="text-left">
                 <h4 className="font-semibold text-base md:text-lg mb-2 ">
