@@ -71,7 +71,7 @@ const AboutSection = () => {
             Get In Touch
           </ScrollLink>
           <Link
-            href="/Mani-Resume.pdf"
+            href="/Mani_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
