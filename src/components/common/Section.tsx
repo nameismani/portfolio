@@ -19,12 +19,12 @@ const Section = ({
   return (
     <section
       id={id}
-      className={clsx("px-1 py-12 md:py-24 md:px-4 relative ", className)}
+      className={clsx("px-0 py-12 md:py-24 md:px-4 relative ", className)}
       {...rest}
     >
       {containerized ? (
         <div
-          className={clsx("container mx-auto max-w-5xl", containerClassName)}
+          className={clsx("container mx-auto max-w-5xl ", containerClassName)}
         >
           {children}
         </div>
