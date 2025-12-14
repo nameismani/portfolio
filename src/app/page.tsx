@@ -1,33 +1,14 @@
-import {
-  AboutSection,
-  ContactSection,
-  ExperienceSection,
-  Footer,
-  HeroSection,
-  ProjectsSection,
-  SkillsSection,
-  StarBackground,
-  ThemeToggle,
-} from "@/components";
-import { Toaster } from "react-hot-toast";
+import Desktop from "@/components/desktop/Desktop";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <Toaster />
-      {/* Theme Toggle */}
-      <ThemeToggle />
-      {/* Background Effects */}
-      <StarBackground />
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <SkillsSection />
-        <ExperienceSection />
-        <ProjectsSection />
-        <ContactSection />
-      </main>
-      <Footer />
-    </div>
+    <main className="h-screen w-screen overflow-hidden text-white">
+      <div className="hidden md:block h-full w-full">
+        <Desktop />
+      </div>
+      <div className="md:hidden h-full w-full overflow-auto">
+        {/* <MobileView /> */}
+      </div>
+    </main>
   );
 }

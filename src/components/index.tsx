@@ -7,6 +7,7 @@ import ProjectsSection from "@/components/ProjectsSection";
 import ContactSection from "@/components/ContactSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import Footer from "@/components/Footer";
+import IntroAnimation from "@/components/IntroAnimation";
 
 export {
   HeroSection,
@@ -18,4 +19,5 @@ export {
   ContactSection,
   Footer,
   ExperienceSection,
+  IntroAnimation,
 };
