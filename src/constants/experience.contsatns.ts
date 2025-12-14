@@ -2,7 +2,7 @@ export const experiences = [
   {
     title: "Full Stack Developer",
     company: "i2Global",
-    period: "Apr 2025 - Nov 2025",
+    period: "Apr 2025 - Present",
     description:
       "React Hook Form, TanStack Query, Framer Motion, Razorpay, FastAPI. Built TestPrep education platform (live classes, chat/forum, coupons, student management) and Transport App for school management.",
     skills: ["Nextjs", "FastAPI", "Google Maps", "MongoDB"],
