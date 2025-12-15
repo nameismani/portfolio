@@ -177,7 +177,7 @@ export default function IntroAnimation({
 
       <div className="flex flex-col md:flex-row items-center gap-2 md:gap-12 relative z-10 p-8 max-w-6xl w-full justify-center">
         {/* Character Image */}
-        <div
+        {/* <div
           ref={characterRef}
           className="relative w-72 h-72 md:w-[500px] md:h-[500px] flex-shrink-0"
         >
@@ -189,7 +189,7 @@ export default function IntroAnimation({
             className="object-contain drop-shadow-[0_0_25px_rgba(59,130,246,0.6)]"
             priority
           />
-        </div>
+        </div> */}
 
         {/* Text Content */}
         <div className="text-center md:text-left flex flex-col justify-center max-w-xl">

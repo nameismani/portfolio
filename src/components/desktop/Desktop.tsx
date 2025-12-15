@@ -108,7 +108,6 @@ export default function Desktop() {
           draggable={false}
         />
         <TopBar />
-
         {/* FIX: Removed 'pointer-events-none' so WindowManager can receive clicks */}
         <div className="absolute inset-0 top-8 bottom-20 p-4 z-0">
           <WindowManager />
@@ -156,7 +155,6 @@ export default function Desktop() {
             </div>
           )}
         </div>
-
         <Dock />
       </div>
     </>
