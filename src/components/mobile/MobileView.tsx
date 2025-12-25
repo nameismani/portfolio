@@ -1,13 +1,18 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import {
   User,
   Shield,
   Terminal,
   Award,
-  Mail,
+  Mail as MailIcon,
   Github,
   Linkedin,
   ExternalLink,
+  FileText,
+  Send,
+  Loader2,
 } from "lucide-react";
 import { projects } from "@/constants/project.contacts";
 import { experiences } from "@/constants/experience.contsatns";
@@ -15,8 +20,54 @@ import { githubUrl, linkedinUrl } from "@/constants/common.constant";
 import Link from "next/link";
 
 export default function MobileView() {
-  const topProjects = projects.slice(0, 2); // still limit projects
-  const allExperiences = experiences; // show all
+  const topProjects = projects.slice(0, 2);
+  const allExperiences = experiences;
+
+  // form state (same pattern as Mail app)
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const handleDownloadResume = () => {
+    const link = document.createElement("a");
+    link.href = "/Mani_Resume.pdf"; // ensure file exists in /public
+    link.download = "Mani_Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleSend = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSending(true);
+    setStatus("idle");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        setTimeout(() => {
+          setName("");
+          setEmail("");
+          setMessage("");
+          setStatus("idle");
+        }, 2000);
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      console.error("Error sending email:", err);
+      setStatus("error");
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 text-black flex flex-col">
@@ -28,7 +79,6 @@ export default function MobileView() {
         <h1 className="text-2xl font-bold">Manikandan B</h1>
         <p className="text-gray-500 text-sm">Full Stack Developer · Chennai</p>
 
-        {/* highlighted message */}
         <div className="mt-3 inline-flex items-center justify-center rounded-lg bg-blue-50 px-3 py-2 border border-blue-100">
           <p className="text-[11px] text-blue-700 font-medium leading-snug">
             For the full <span className="font-semibold">macOS‑style</span>{" "}
@@ -37,7 +87,7 @@ export default function MobileView() {
           </p>
         </div>
 
-        <div className="flex items-center justify-center gap-3 mt-4">
+        <div className="flex flex-wrap items-center justify-center gap-3 mt-4">
           <Link
             href={githubUrl}
             target="_blank"
@@ -56,11 +106,18 @@ export default function MobileView() {
             <Linkedin size={14} />
             LinkedIn
           </Link>
+          <button
+            onClick={handleDownloadResume}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white border border-gray-300 text-xs font-medium text-gray-800 hover:bg-gray-100 transition-all active:scale-[0.98] duration-200"
+          >
+            <FileText size={14} />
+            Resume
+          </button>
           <a
             href="mailto:nameismani19@gmail.com"
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-gray-200 text-gray-700 text-xs font-medium hover:bg-gray-300 transition-all active:scale-[0.98] duration-200"
           >
-            <Mail size={14} />
+            <MailIcon size={14} />
             Email
           </a>
         </div>
@@ -99,7 +156,7 @@ export default function MobileView() {
           </div>
         </div>
 
-        {/* Projects (still top 2) */}
+        {/* Projects (top 2) */}
         <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
           <div className="flex items-center gap-2 mb-2">
             <div className="p-2 bg-blue-50 text-blue-500 rounded-lg">
@@ -183,18 +240,19 @@ export default function MobileView() {
           ))}
         </div>
 
-        {/* Contact */}
+        {/* Contact + inline form */}
         <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
           <div className="flex items-center gap-2 mb-2">
             <div className="p-2 bg-blue-50 text-blue-500 rounded-lg">
-              <Mail size={22} />
+              <MailIcon size={22} />
             </div>
             <div className="font-semibold">Contact</div>
           </div>
           <p className="text-sm text-gray-500 mb-3">
             Prefer email first, then a call for deeper discussions.
           </p>
-          <div className="space-y-2 text-sm">
+
+          <div className="space-y-2 text-sm mb-4">
             <div>
               <div className="text-xs text-gray-500 uppercase font-semibold">
                 Email
@@ -213,6 +271,80 @@ export default function MobileView() {
               <div className="text-gray-700">9566195492, 9962453404</div>
             </div>
           </div>
+
+          {/* Form */}
+          <form onSubmit={handleSend} className="space-y-3 mt-2">
+            <div>
+              <label className="block text-xs font-medium text-gray-700 mb-1">
+                Your Name
+              </label>
+              <input
+                type="text"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your name"
+                className="w-full px-3 py-2 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-700 mb-1">
+                Your Email
+              </label>
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="name@example.com"
+                className="w-full px-3 py-2 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-700 mb-1">
+                Message
+              </label>
+              <textarea
+                required
+                rows={3}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Type your message here..."
+                className="w-full px-3 py-2 text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none text-sm"
+              />
+            </div>
+
+            <div className="flex justify-end items-center gap-3 pt-1">
+              {status === "success" && (
+                <span className="text-green-600 text-xs font-medium">
+                  Sent successfully!
+                </span>
+              )}
+              {status === "error" && (
+                <span className="text-red-500 text-xs font-medium">
+                  Failed to send. Try again.
+                </span>
+              )}
+
+              <button
+                type="submit"
+                disabled={isSending || status === "success"}
+                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 cursor-pointer active:scale-[0.98] duration-200 text-sm"
+              >
+                {isSending ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send size={16} />
+                    Send Message
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
 
