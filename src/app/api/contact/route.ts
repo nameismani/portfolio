@@ -1,12 +1,15 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-export async function POST(request: NextRequest) {
+export async function POST(req: Request) {
   try {
-    const { name, email, message } = await request.json();
+    const { name, email, message } = await req.json();
 
     if (!name || !email || !message) {
-      return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Email and message are required" },
+        { status: 400 }
+      );
     }
 
     const transporter = nodemailer.createTransport({
@@ -17,46 +20,57 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    const phone1 = process.env.CONTACT_PHONE_1 || "";
-    const phone2 = process.env.CONTACT_PHONE_2 || "";
-
-    const phoneHtml = `
-      <p>If you want to contact me immediately, call:</p>
-      <ul>
-        ${phone1 ? `<li>${phone1}</li>` : ""}
-        ${phone2 ? `<li>${phone2}</li>` : ""}
-      </ul>
-    `;
-
-    // Email to yourself (in HTML)
-    await transporter.sendMail({
+    // Email to you (portfolio owner)
+    const mailOptionsToOwner = {
       from: `"Website Contact" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
-      subject: `New contact form from ${name}`,
+      subject: `New Message from Portfolio: ${email}`,
+      text: `You have received a new message from your portfolio contact form.\n\nFrom: ${email}\n\nMessage:\n${message}`,
       html: `
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message}</p>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #3b82f6;">New Message from Portfolio</h2>
+          <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px;">
+            <p style="margin-bottom: 10px;"><strong>From:</strong> ${email}</p>
+            <p style="margin-bottom: 20px;"><strong>Message:</strong></p>
+            <div style="background-color: white; padding: 15px; border-radius: 4px; border-left: 4px solid #3b82f6;">
+              ${message.replace(/\n/g, "<br>")}
+            </div>
+          </div>
+        </div>
       `,
-    });
+    };
 
-    // Confirmation email to user (in HTML)
-    await transporter.sendMail({
+    // Confirmation email to sender
+    const mailOptionsToSender = {
       from: `"Website Team" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: "Thanks for getting in touch!",
       html: `
-        <p>Hi ${name},</p>
-        <p>Thanks for your message! I will get back to you soon.</p>
-        ${phoneHtml}
-        <p>Best,<br/>Manikandan</p>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #3b82f6;">Thank You for Contacting Me</h2>
+          <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px;">
+            <p style="margin-bottom: 10px;">Hi ${name},</p>
+            <p style="margin-bottom: 20px;">Thanks for your message! I will get back to you soon.</p>
+            <p style="margin-bottom: 10px;">If you want to contact me immediately, call:</p>
+            <ul style="margin-bottom: 20px;">
+              <li>9566195492</li>
+              <li>9962453404</li>
+            </ul>
+            <p style="margin-bottom: 10px;">Best,<br/>Manikandan</p>
+          </div>
+        </div>
       `,
-    });
+    };
 
-    return NextResponse.json({ message: "Emails sent" }, { status: 200 });
+    await transporter.sendMail(mailOptionsToOwner);
+    await transporter.sendMail(mailOptionsToSender);
+
+    return NextResponse.json({
+      success: true,
+      message: "Emails sent successfully",
+    });
   } catch (error) {
-    console.error("Email error", error);
+    console.error("Error sending email:", error);
     return NextResponse.json(
       { error: "Failed to send emails" },
       { status: 500 }

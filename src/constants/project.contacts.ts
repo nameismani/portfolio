@@ -1,4 +1,5 @@
 import { Project } from "@/types/project.types";
+import { githubUrl } from "./common.constant";
 
 export const projects: Project[] = [
   // Organization Projects
@@ -41,7 +42,7 @@ export const projects: Project[] = [
     image: "/projects/own/personal-assistant.png",
     tags: ["Next.js", "LangChain", "AI Embeddings"],
     demoUrl: "https://personal-assistant-sigma-ashen.vercel.app/",
-    githubUrl: "https://github.com/nameismani/personal-assistant",
+    githubUrl: `${githubUrl}/personal-assistant`,
     category: "personal",
   },
   {
@@ -52,7 +53,7 @@ export const projects: Project[] = [
     image: "/projects/own/turf.png",
     tags: ["Next.js", "Node-Cron", "Vercel"],
     demoUrl: "https://turfproject.vercel.app/",
-    githubUrl: "https://github.com/nameismani/turfproject",
+    githubUrl: `${githubUrl}/turfproject`,
     category: "personal",
   },
   // Freelance Projects
@@ -64,7 +65,7 @@ export const projects: Project[] = [
     image: "/projects/freelance_projects/jinterior_freelance.png",
     tags: ["Next.js", "React", "SEO"],
     demoUrl: "https://jinteriorssr.netlify.app/",
-    githubUrl: "https://github.com/nameismani/J-Interior",
+    githubUrl: `${githubUrl}/J-Interior`,
     category: "freelance",
   },
 ];
@@ -110,7 +111,7 @@ export const newprojects: Project[] = [
     image: "/projects/own/personal-assistant.png",
     tags: ["Next.js", "LangChain", "AI Embeddings"],
     demoUrl: "https://personal-assistant-sigma-ashen.vercel.app/",
-    githubUrl: "https://github.com/nameismani/personal-assistant",
+    githubUrl: `${githubUrl}/personal-assistant`,
     category: "personal",
   },
   {
@@ -121,7 +122,7 @@ export const newprojects: Project[] = [
     image: "/projects/own/turf.png",
     tags: ["Next.js", "Node-Cron", "Vercel"],
     demoUrl: "https://turfproject.vercel.app/",
-    githubUrl: "https://github.com/nameismani/turfproject",
+    githubUrl: `${githubUrl}/turfproject`,
     category: "personal",
   },
   // Freelance Projects
@@ -133,7 +134,7 @@ export const newprojects: Project[] = [
     image: "/projects/freelance_projects/jinterior_freelance.png",
     tags: ["Next.js", "React", "SEO"],
     demoUrl: "https://jinteriorssr.netlify.app/",
-    githubUrl: "https://github.com/nameismani/J-Interior",
+    githubUrl: `${githubUrl}/J-Interior`,
     category: "freelance",
   },
 ];
