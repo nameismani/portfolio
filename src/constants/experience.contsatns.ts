@@ -18,7 +18,7 @@ export const experiences = [
   {
     title: "Web App Dev Trainee",
     company: "Novalnet e-Solutions",
-    period: "Aug 2023 - Jan 2024",
+    period: "Aug 2023 - Dec 2023",
     description:
       "Frontend & backend training. Built user feedback, session lockout, real-time notification/admin tools.",
     skills: ["Node.js", "Express", "Ejs", "Maria DB"],
