@@ -44,7 +44,7 @@ export default function WindowFrame({
         style={{ zIndex }}
         className={`absolute ${
           windowState?.isFullScreen
-            ? "inset-0 w-full h-full"
+            ? "inset-0  w-full h-full"
             : "top-20 left-20 w-[800px] h-[500px]"
         } bg-mac-window backdrop-blur-xl rounded-xl shadow-2xl border border-white/20 flex flex-col overflow-hidden resize`}
         onClick={() => focusWindow(id)}

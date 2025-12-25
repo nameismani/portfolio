@@ -9,6 +9,7 @@ import {
   Loader2,
 } from "lucide-react";
 import { githubUrl, linkedinUrl } from "@/constants/common.constant";
+import Link from "next/link";
 
 export default function Mail() {
   const [isComposeOpen, setIsComposeOpen] = useState(false);
@@ -68,7 +69,7 @@ export default function Mail() {
         {/* Sidebar List */}
         <div className="w-64 border-r border-gray-200 overflow-y-auto bg-white">
           <div className="p-3 border-b border-gray-100 bg-blue-50 border-l-4 border-l-blue-500">
-            <div className="font-bold text-sm">Manikandan B</div>
+            <div className="font-bold text-gray-400 text-sm">Manikandan B</div>
             <div className="text-xs text-gray-500 mb-1">Contact Details</div>
             <div className="text-xs text-gray-400 truncate">
               I'm always open to connect and collaborate!
@@ -122,24 +123,24 @@ export default function Mail() {
               </div>
 
               <div className="flex gap-4 mt-4">
-                <a
+                <Link
                   href={githubUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex-1 p-3 bg-gray-900 text-white rounded-lg flex items-center justify-center gap-2 hover:bg-black transition-colors"
+                  className="flex-1 p-3 bg-gray-900 text-white rounded-lg flex items-center justify-center gap-2 hover:bg-black transition-all cursor-pointer active:scale-[0.98] duration-200"
                 >
                   <Github size={18} />
                   GitHub
-                </a>
-                <a
+                </Link>
+                <Link
                   href={linkedinUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex-1 p-3 bg-blue-600 text-white rounded-lg flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors"
+                  className="flex-1 p-3 bg-blue-600 text-white rounded-lg flex items-center justify-center gap-2 hover:bg-blue-700 transition-all cursor-pointer active:scale-[0.98] duration-200"
                 >
                   <Linkedin size={18} />
                   LinkedIn
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -224,7 +225,7 @@ export default function Mail() {
                 <button
                   type="submit"
                   disabled={isSending || status === "success"}
-                  className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 cursor-pointer active:scale-[0.98] duration-200"
+                  className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 cursor-pointer active:scale-[0.98] duration-200"
                 >
                   {isSending ? (
                     <>

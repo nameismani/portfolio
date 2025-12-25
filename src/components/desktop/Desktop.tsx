@@ -144,7 +144,7 @@ export default function Desktop() {
                     className="text-gray-400 text-sm md:text-base leading-relaxed"
                   >
                     Welcome, Hunter. Access the applications in the dock below
-                    to view my skills, projects, and stats.
+                    to view my skills, projects, and experience.
                   </p>
                 </div>
 

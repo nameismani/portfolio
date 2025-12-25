@@ -31,6 +31,7 @@ export async function POST(req: Request) {
           <h2 style="color: #3b82f6;">New Message from Portfolio</h2>
           <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px;">
             <p style="margin-bottom: 10px;"><strong>From:</strong> ${email}</p>
+              <p style="margin-bottom: 10px;"><strong>Name:</strong> ${name}</p>
             <p style="margin-bottom: 20px;"><strong>Message:</strong></p>
             <div style="background-color: white; padding: 15px; border-radius: 4px; border-left: 4px solid #3b82f6;">
               ${message.replace(/\n/g, "<br>")}

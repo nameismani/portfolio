@@ -16,6 +16,7 @@ import { skills } from "@/constants/skill.constants";
 import { projects } from "@/constants/project.contacts";
 import { experiences } from "@/constants/experience.contsatns";
 import { githubUrl, linkedinUrl } from "@/constants/common.constant";
+import Link from "next/link";
 
 const getSkillLabel = (level: number) => {
   if (level >= 85) return "Professional";
@@ -239,7 +240,7 @@ export default function Finder() {
 
         {/* Footer */}
         <div className="mt-12 pt-6 border-t border-gray-200 text-center text-gray-400 text-sm">
-          © 2025 Manikandan B. Designed with love & code.
+          &copy; {new Date().getFullYear()} nameismani.com. All rights reserved.
         </div>
       </div>
     </div>
@@ -261,7 +262,7 @@ function SidebarItem({
 }) {
   return (
     <div
-      className={`group flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium cursor-pointer my-[1px] transition-all duration-200 ${
+      className={`group flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium cursor-pointer my-[1px] transition-all duration-200 active:scale-[0.98] ${
         active
           ? "bg-blue-500 text-white shadow-md"
           : "hover:bg-gray-200/50 text-gray-600"
@@ -326,20 +327,30 @@ function ProjectCard({
         </h3>
         <div className="flex gap-2">
           {demoUrl && (
-            <a href={demoUrl} target="_blank" rel="noopener noreferrer">
+            <Link
+              href={demoUrl}
+              className="transition-all cursor-pointer active:scale-[0.98] duration-200"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <ExternalLink
                 size={16}
-                className="text-gray-400 group-hover:text-blue-500"
+                className="text-gray-400 group-hover:text-blue-500 "
               />
-            </a>
+            </Link>
           )}
           {githubUrl && (
-            <a href={githubUrl} target="_blank" rel="noopener noreferrer">
+            <Link
+              href={githubUrl}
+              className="transition-all cursor-pointer active:scale-[0.98] duration-200"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Github
                 size={16}
                 className="text-gray-400 group-hover:text-blue-500"
               />
-            </a>
+            </Link>
           )}
         </div>
       </div>
@@ -361,14 +372,14 @@ function SocialLink({
   href: string;
 }) {
   return (
-    <a
+    <Link
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-colors"
+      className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition-all cursor-pointer active:scale-[0.98] duration-200"
     >
       <Icon size={16} />
       {label}
-    </a>
+    </Link>
   );
 }
