@@ -7,6 +7,7 @@ export type WindowState = {
   isMinimized: boolean;
   zIndex: number;
   content: React.ReactNode;
+  isFullScreen: boolean;
 };
 
 type StoreState = {
@@ -17,6 +18,7 @@ type StoreState = {
   closeWindow: (id: string) => void;
   minimizeWindow: (id: string) => void;
   focusWindow: (id: string) => void;
+  toggleFullScreen: (id: string) => void;
 };
 
 export const useStore = create<StoreState>((set) => ({
@@ -32,7 +34,13 @@ export const useStore = create<StoreState>((set) => ({
         return {
           windows: state.windows.map((w) =>
             w.id === id
-              ? { ...w, isOpen: true, isMinimized: false, zIndex: maxZ + 1 }
+              ? {
+                  ...w,
+                  isOpen: true,
+                  isMinimized: false,
+                  zIndex: maxZ + 1,
+                  isFullScreen: false,
+                }
               : w
           ),
           activeWindowId: id,
@@ -47,6 +55,7 @@ export const useStore = create<StoreState>((set) => ({
         isMinimized: false,
         zIndex: maxZ + 1,
         content,
+        isFullScreen: false,
       };
 
       return {
@@ -80,4 +89,10 @@ export const useStore = create<StoreState>((set) => ({
         zIndexes: { ...state.zIndexes, [id]: maxZ + 1 },
       };
     }),
+  toggleFullScreen: (id) =>
+    set((state) => ({
+      windows: state.windows.map((w) =>
+        w.id === id ? { ...w, isFullScreen: !w.isFullScreen } : w
+      ),
+    })),
 }));
