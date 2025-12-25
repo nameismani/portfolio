@@ -1,4 +1,5 @@
 import Desktop from "@/components/desktop/Desktop";
+import MobileView from "@/components/mobile/MobileView";
 
 export default function Home() {
   return (
@@ -7,7 +8,7 @@ export default function Home() {
         <Desktop />
       </div>
       <div className="md:hidden h-full w-full overflow-auto">
-        {/* <MobileView /> */}
+        <MobileView />
       </div>
     </main>
   );
