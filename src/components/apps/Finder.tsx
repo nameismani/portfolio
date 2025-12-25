@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   User,
   Book,
@@ -27,6 +27,14 @@ const getSkillLabel = (level: number) => {
 
 export default function Finder() {
   const [activeSection, setActiveSection] = useState("about");
+  const contentRef = useRef<HTMLDivElement | null>(null);
+
+  // scroll to top whenever section changes
+  useEffect(() => {
+    if (contentRef.current) {
+      contentRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [activeSection]);
 
   return (
     <div className="flex h-full text-black font-sans selection:bg-blue-100">
@@ -67,7 +75,10 @@ export default function Finder() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 bg-white p-8 overflow-y-auto scrollbar-hide">
+      <div
+        ref={contentRef}
+        className="flex-1 bg-white p-8 overflow-y-auto scrollbar-hide"
+      >
         {/* Header */}
         <div className="border-b border-gray-200 pb-6 mb-6">
           <h1 className="text-3xl font-bold mb-2 tracking-tight">
