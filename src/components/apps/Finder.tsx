@@ -105,7 +105,7 @@ export default function Finder() {
           <div className="space-y-8 max-w-4xl">
             <Section title="Bio">
               <p className="text-gray-700 leading-relaxed text-lg">
-                MERN Stack Developer with 2+ years of experience in startup and
+                MERN Stack Developer with 3+ years of experience in startup and
                 product environments. Passionate about building scalable web
                 applications across frontend and backend, and continuously
                 learning new technologies. I thrive in solving challenging tasks

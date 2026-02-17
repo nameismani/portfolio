@@ -35,7 +35,7 @@ export default function Terminal({
   ];
 
   const [history, setHistory] = useState<HistoryLine[]>(
-    initialLines.map((line) => ({ text: line, type: "system" }))
+    initialLines.map((line) => ({ text: line, type: "system" })),
   );
   const [input, setInput] = useState("");
   const [cmdHistory, setCmdHistory] = useState<string[]>([]);
@@ -89,7 +89,7 @@ export default function Terminal({
         `Period   : ${exp.period}`,
         `Summary  : ${exp.description}`,
         `Stack    : ${exp.skills.join(", ")}`,
-        "------------------------------------------------------------"
+        "------------------------------------------------------------",
       );
     });
     return lines;
@@ -100,10 +100,10 @@ export default function Terminal({
       category === "organization"
         ? "--- ORGANIZATION PROJECTS ---"
         : category === "personal"
-        ? "--- PERSONAL PROJECTS ---"
-        : category === "freelance"
-        ? "--- FREELANCE PROJECTS ---"
-        : "--- ALL PROJECTS ---";
+          ? "--- PERSONAL PROJECTS ---"
+          : category === "freelance"
+            ? "--- FREELANCE PROJECTS ---"
+            : "--- ALL PROJECTS ---";
 
     const filtered =
       category != null
@@ -120,7 +120,7 @@ export default function Terminal({
         `   Demo : ${p.demoUrl || "N/A"}`,
         `   Code : ${p.githubUrl || "Private / N/A"}`,
         `   Info : ${p.description}`,
-        "------------------------------------------------------------"
+        "------------------------------------------------------------",
       );
     });
 
@@ -130,7 +130,7 @@ export default function Terminal({
 
     lines.push(
       "To know more about my projects, go to my Personal Assistant Bot:",
-      "https://personal-assistant-sigma-ashen.vercel.app"
+      "https://personal-assistant-sigma-ashen.vercel.app",
     );
 
     return lines;
@@ -142,7 +142,7 @@ export default function Terminal({
       "Name      : Manikandan B",
       "Role      : Full Stack / MERN Stack Developer",
       "Location  : Chennai, Tamil Nadu, India",
-      "Summary   : MERN Stack Developer with 2+ years experience in startup & product teams,",
+      "Summary   : MERN Stack Developer with 3+ years experience in startup & product teams,",
       "            building scalable web apps across frontend and backend.",
       "Portfolio : https://portfolio.nameismani.com",
       `GitHub    : ${githubUrl}`,
@@ -181,7 +181,7 @@ export default function Terminal({
           "  contact             - Contact details & links",
           "  clear               - Clear terminal",
           "  sudo                - Execute command as Super User",
-          "  arise               - [LOCKED] Hidden protocol"
+          "  arise               - [LOCKED] Hidden protocol",
         );
         break;
 
@@ -225,14 +225,14 @@ export default function Terminal({
         response.push(
           "ACCESS DENIED.",
           "Shadow protocol requires higher clearance.",
-          "Hint: Keep building and shipping, power scales with experience."
+          "Hint: Keep building and shipping, power scales with experience.",
         );
         break;
 
       case lowerCmd === "sudo":
         type = "error";
         response.push(
-          "User 'mani' is not in the sudoers file. This incident will be reported."
+          "User 'mani' is not in the sudoers file. This incident will be reported.",
         );
         break;
 
@@ -242,7 +242,7 @@ export default function Terminal({
       default:
         type = "error";
         response.push(
-          `Command not found: ${cmd}. Type 'help' for available commands.`
+          `Command not found: ${cmd}. Type 'help' for available commands.`,
         );
     }
 
@@ -313,10 +313,10 @@ export default function Terminal({
             line.type === "input"
               ? "text-white font-semibold mt-2"
               : line.type === "error"
-              ? "text-red-500"
-              : line.type === "system"
-              ? "text-blue-300 opacity-80"
-              : "text-blue-400"
+                ? "text-red-500"
+                : line.type === "system"
+                  ? "text-blue-300 opacity-80"
+                  : "text-blue-400"
           }`}
         >
           {line.text}

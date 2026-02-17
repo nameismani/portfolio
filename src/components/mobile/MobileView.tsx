@@ -128,7 +128,7 @@ export default function MobileView() {
         <MobileCard
           icon={User}
           title="About Me"
-          desc="Full‑stack / MERN developer with 2+ years experience building scalable web apps in startup and product environments. Enjoys solving complex UI problems and creating smooth user experiences."
+          desc="Full‑stack / MERN developer with 3+ years experience building scalable web apps in startup and product environments. Enjoys solving complex UI problems and creating smooth user experiences."
         />
 
         {/* Skills */}
