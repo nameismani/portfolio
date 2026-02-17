@@ -39,7 +39,7 @@ const AboutSection = () => {
           variants={fadeUp}
           className="text-sm md:text-xl text-center mb-3 md:mb-6"
         >
-          MERN Stack Developer with Python FastAPI & Flask • 2+ Years in web app
+          MERN Stack Developer with Python FastAPI & Flask • 3+ Years in web app
           development
         </MotionParagraph>
         <MotionParagraph
